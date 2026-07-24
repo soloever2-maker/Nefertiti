@@ -248,6 +248,30 @@ section.tint{ background:var(--sand); }
 .d-country{background:linear-gradient(160deg, #8A9A5B, #55673A); }
 .d-ancient{background:linear-gradient(160deg, #6B4A2E, var(--brown)); }
 
+/* ---------- Founder (Meet Azza) ---------- */
+.founder{
+  display:grid; grid-template-columns:.85fr 1.15fr; gap:64px; align-items:center;
+}
+@media (max-width:840px){ .founder{ grid-template-columns:1fr; gap:36px; } }
+.founder-photo{
+  position:relative; border-radius:var(--radius); overflow:hidden;
+  aspect-ratio:3/3.8; box-shadow:var(--shadow); max-width:380px;
+}
+@media (max-width:840px){ .founder-photo{ margin:0 auto; width:min(320px,100%); } }
+.founder-photo svg{ display:block; width:100%; height:100%; }
+.photo-note{
+  position:absolute; bottom:14px; left:50%; transform:translateX(-50%);
+  background:rgba(65,25,0,.75); color:var(--cream);
+  font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+  padding:6px 14px; border-radius:999px; white-space:nowrap;
+}
+.founder-text h2{ margin-bottom:20px; }
+.founder-text p{ color:var(--brown-soft); margin-bottom:16px; font-size:1.03rem; }
+.founder-sign{
+  font-family:var(--font-display); font-style:italic; font-size:1.25rem;
+  color:var(--gold-deep) !important; margin-top:6px;
+}
+
 /* ---------- Tabs: Coaches / Companies ---------- */
 .tabs{ display:flex; gap:10px; margin-bottom:36px; flex-wrap:wrap; }
 .tab-btn{
@@ -525,6 +549,31 @@ footer .logo{ justify-content:center; margin-bottom:10px; }
   </div>
 </section>
 
+<!-- ==================== MEET AZZA ==================== -->
+<section id="azza">
+  <div class="wrap founder">
+    <div class="founder-photo" aria-hidden="true">
+      <svg viewBox="0 0 300 380" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+        <rect width="300" height="380" fill="#F7EBD9"/>
+        <circle cx="150" cy="120" r="120" fill="#E4CD9F" opacity=".45"/>
+        <circle cx="150" cy="132" r="46" fill="#B8863B" opacity=".85"/>
+        <path d="M150 40v22M150 202v22M58 132h22M220 132h22M85 67l16 16M199 197l16 16M215 67l-16 16M101 197l-16 16" stroke="#96662A" stroke-width="4" stroke-linecap="round" opacity=".7"/>
+        <path d="M40 300q55-46 110-46t110 46v80H40z" fill="#114B41" opacity=".92"/>
+        <circle cx="150" cy="250" r="42" fill="#6B4A2E"/>
+      </svg>
+      <span class="photo-note" data-i18n="azza_photo_note">Azza's photo goes here</span>
+    </div>
+    <div class="founder-text">
+      <span class="eyebrow" data-i18n="azza_eyebrow">Meet your local host</span>
+      <h2 data-i18n="azza_title">Ciao, I'm Azza</h2>
+      <p data-i18n="azza_p1">I was born in Egypt, built a career in Saudi Arabia, and today I live in Italy. Twenty years of producing events taught me every detail that makes an experience unforgettable — but it was going on retreats myself that changed my life.</p>
+      <p data-i18n="azza_p2">The further I lived from Egypt, the more clearly I saw what it holds: a sea that heals, a desert that silences the mind, and five thousand years of feminine power — from Nefertiti to the women leading circles today.</p>
+      <p data-i18n="azza_p3">I didn't build Nefertiti because I wanted another business. I built it because retreats changed my life — and because I want to hold the door of my Egypt open for you and your community.</p>
+      <p class="founder-sign" data-i18n="azza_sign">— Azza, Founder & Local Host</p>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== FOR COACHES / COMPANIES ==================== -->
 <section id="who">
   <div class="wrap">
@@ -761,6 +810,12 @@ en: {
   dest_sinai:"Sinai Mountains", dest_sinai_p:"Sunrise hikes, Bedouin tea, sacred stillness.",
   dest_country:"Countryside & Oases", dest_country_p:"Palm groves, hot springs, farm-to-table food.",
   dest_ancient:"Ancient Egypt", dest_ancient_p:"Pyramids, Luxor temples and queens' beauty rituals.",
+  azza_eyebrow:"Meet your local host", azza_title:"Ciao, I'm Azza",
+  azza_photo_note:"Azza's photo goes here",
+  azza_p1:"I was born in Egypt, built a career in Saudi Arabia, and today I live in Italy. Twenty years of producing events taught me every detail that makes an experience unforgettable — but it was going on retreats myself that changed my life.",
+  azza_p2:"The further I lived from Egypt, the more clearly I saw what it holds: a sea that heals, a desert that silences the mind, and five thousand years of feminine power — from Nefertiti to the women leading circles today.",
+  azza_p3:"I didn't build Nefertiti because I wanted another business. I built it because retreats changed my life — and because I want to hold the door of my Egypt open for you and your community.",
+  azza_sign:"— Azza, Founder & Local Host",
   who_eyebrow:"Who we work with", who_title:"We design around you",
   tab_coaches:"For Coaches", tab_companies:"For Companies",
   coach_h:"You simply arrive… and lead your retreat.",
@@ -828,6 +883,12 @@ it: {
   dest_sinai:"Montagne del Sinai", dest_sinai_p:"Trekking all'alba, tè beduino, quiete sacra.",
   dest_country:"Campagna & Oasi", dest_country_p:"Palmeti, sorgenti termali, cucina a km zero.",
   dest_ancient:"Antico Egitto", dest_ancient_p:"Piramidi, templi di Luxor e rituali di bellezza delle regine.",
+  azza_eyebrow:"La tua host locale", azza_title:"Ciao, sono Azza",
+  azza_photo_note:"Qui va la foto di Azza",
+  azza_p1:"Sono nata in Egitto, ho costruito la mia carriera in Arabia Saudita e oggi vivo in Italia. Vent'anni di produzione eventi mi hanno insegnato ogni dettaglio che rende un'esperienza indimenticabile — ma sono stati i retreat che ho vissuto in prima persona a cambiarmi la vita.",
+  azza_p2:"Più vivevo lontana dall'Egitto, più chiaramente vedevo ciò che custodisce: un mare che guarisce, un deserto che mette a tacere la mente, e cinquemila anni di forza femminile — da Nefertiti alle donne che guidano i cerchi di oggi.",
+  azza_p3:"Non ho creato Nefertiti perché volevo un altro business. L'ho creata perché i retreat mi hanno cambiato la vita — e perché voglio tenere aperta la porta del mio Egitto per te e la tua community.",
+  azza_sign:"— Azza, Founder & Host Locale",
   who_eyebrow:"Con chi lavoriamo", who_title:"Progettiamo intorno a te",
   tab_coaches:"Per i Coach", tab_companies:"Per le Aziende",
   coach_h:"Tu semplicemente arrivi… e guidi il tuo retreat.",
