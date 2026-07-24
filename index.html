@@ -108,6 +108,35 @@ header{
 .nav-links a:hover{ color:var(--gold-deep); }
 @media (max-width:840px){ .nav-links .nav-item{ display:none; } }
 
+/* Burger (mobile only) */
+.burger{
+  display:none; flex-direction:column; justify-content:center; gap:5px;
+  width:42px; height:42px; padding:0 9px;
+  background:transparent; border:1.5px solid var(--gold);
+  border-radius:10px; cursor:pointer;
+}
+.burger span{
+  display:block; height:2px; width:100%; background:var(--brown);
+  border-radius:2px; transition:transform .25s ease, opacity .2s ease;
+}
+.burger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2){ opacity:0; }
+.burger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+@media (max-width:840px){ .burger{ display:flex; } }
+
+/* Mobile menu panel */
+.mobile-menu{
+  display:none; flex-direction:column;
+  background:var(--cream); border-top:1px solid var(--sand-deep);
+}
+.mobile-menu.open{ display:flex; }
+.mobile-menu a{
+  padding:15px 24px; text-decoration:none; color:var(--brown);
+  font-weight:500; font-size:1rem;
+  border-bottom:1px solid var(--sand-deep);
+}
+.mobile-menu a:active{ background:var(--sand); color:var(--gold-deep); }
+
 /* Language switch */
 .lang-switch{
   display:flex; border:1.5px solid var(--gold); border-radius:999px; overflow:hidden;
@@ -499,8 +528,18 @@ footer .logo{ justify-content:center; margin-bottom:10px; }
         <button id="lang-en" class="active" onclick="setLang('en')">EN</button>
         <button id="lang-it" onclick="setLang('it')">IT</button>
       </div>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#why" onclick="closeMenu()" data-i18n="nav_why">Why Egypt</a>
+    <a href="#azza" onclick="closeMenu()" data-i18n="nav_azza">Meet Azza</a>
+    <a href="#destinations" onclick="closeMenu()" data-i18n="nav_dest">Destinations</a>
+    <a href="#services" onclick="closeMenu()" data-i18n="nav_svc">Services</a>
+    <a href="#contact" onclick="closeMenu()" data-i18n="nav_contact">Contact</a>
+  </div>
 </header>
 
 <!-- ==================== HERO ==================== -->
@@ -876,7 +915,7 @@ footer .logo{ justify-content:center; margin-bottom:10px; }
 const T = {
 en: {
   tagline:"Luxury Retreat Producer", tagline2:"Luxury Retreat Producer",
-  nav_why:"Why Egypt", nav_dest:"Destinations", nav_svc:"Services", nav_contact:"Contact",
+  nav_why:"Why Egypt", nav_azza:"Meet Azza", nav_dest:"Destinations", nav_svc:"Services", nav_contact:"Contact",
   hero_eyebrow:"Luxury Retreat Production · Egypt",
   hero_title:"Host your dream retreat<br>in <em>Egypt</em>",
   hero_lead:"You transform lives. We create the perfect setting — you bring your community, we'll create the transformation they will never forget.",
@@ -950,7 +989,7 @@ en: {
 },
 it: {
   tagline:"Produzione Retreat di Lusso", tagline2:"Produzione Retreat di Lusso",
-  nav_why:"Perché l'Egitto", nav_dest:"Destinazioni", nav_svc:"Servizi", nav_contact:"Contatti",
+  nav_why:"Perché l'Egitto", nav_azza:"Chi è Azza", nav_dest:"Destinazioni", nav_svc:"Servizi", nav_contact:"Contatti",
   hero_eyebrow:"Produzione Retreat di Lusso · Egitto",
   hero_title:"Ospita il retreat dei tuoi sogni<br>in <em>Egitto</em>",
   hero_lead:"Tu trasformi le vite. Noi creiamo l'ambiente perfetto — tu porti la tua community, noi creiamo la trasformazione che non dimenticheranno mai.",
@@ -1066,6 +1105,22 @@ function setTab(name, btn){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   const panel = document.getElementById('panel-'+name);
   if(panel) panel.classList.add('active');
+}
+
+/* ---------- Mobile menu ---------- */
+function toggleMenu(){
+  const menu = document.getElementById('mobileMenu');
+  const burger = document.getElementById('burger');
+  if(!menu || !burger) return;
+  const open = menu.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+function closeMenu(){
+  const menu = document.getElementById('mobileMenu');
+  const burger = document.getElementById('burger');
+  if(menu) menu.classList.remove('open');
+  if(burger){ burger.classList.remove('open'); burger.setAttribute('aria-expanded','false'); }
 }
 
 /* ---------- Fake form submit (demo) ---------- */
