@@ -182,7 +182,8 @@ section.tint{ background:var(--sand); }
 
 /* ---------- Why Egypt: comparison table ---------- */
 .compare{
-  width:100%; border-collapse:separate; border-spacing:0;
+  width:100%; min-width:660px;
+  border-collapse:separate; border-spacing:0;
   background:var(--white); border-radius:var(--radius);
   box-shadow:var(--shadow); overflow:hidden;
   font-size:.95rem;
@@ -195,9 +196,15 @@ section.tint{ background:var(--sand); }
 }
 .compare tbody tr:not(:last-child) td{ border-bottom:1px solid var(--sand-deep); }
 .compare td:first-child{ font-weight:600; }
+.compare th:first-child, .compare td:first-child{
+  position:sticky; left:0; z-index:2;
+}
+.compare td:first-child{ background:var(--white); box-shadow:2px 0 6px -3px rgba(65,25,0,.18); }
+.compare thead th:first-child{ background:var(--brown); }
 .compare .egypt-col{ background:rgba(184,134,59,.10); font-weight:600; color:var(--gold-deep); }
 .compare thead .egypt-col{ background:var(--gold); color:var(--white); }
-.table-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+.table-scroll{ overflow-x:auto; -webkit-overflow-scrolling:touch; border-radius:var(--radius); }
+.swipe-hint{ display:none; }
 .footnote{ margin-top:14px; font-size:.8rem; color:var(--brown-soft); }
 
 /* ---------- Weather grid ---------- */
@@ -383,6 +390,91 @@ footer{
   padding:44px 0 54px; text-align:center; color:var(--brown-soft); font-size:.88rem;
 }
 footer .logo{ justify-content:center; margin-bottom:10px; }
+
+/* ============================================================
+   MOBILE PASS — everything below tightens the layout ≤640px
+   ============================================================ */
+@media (max-width:640px){
+  /* Rhythm: less vertical air, everything closer */
+  section{ padding:56px 0; }
+  .wrap{ padding:0 18px; }
+  .section-head{ margin-bottom:30px; }
+  .section-head p{ font-size:.98rem; }
+  h2{ font-size:clamp(1.7rem, 7.5vw, 2.2rem); }
+
+  /* Header: smaller logo so it never fights the lang switch */
+  .nav{ padding:12px 18px; }
+  .logo{ font-size:1.35rem; gap:8px; }
+  .logo svg{ width:24px; height:24px; }
+  .logo small{ font-size:.5rem; letter-spacing:.22em; }
+  .lang-switch button{ padding:5px 12px; font-size:.78rem; }
+
+  /* Hero */
+  .hero{ padding:56px 0 64px; text-align:left; }
+  .hero h1{ font-size:clamp(2.1rem, 9.5vw, 2.7rem); }
+  .hero .lead{ font-size:1rem; margin-bottom:28px; }
+  .hero .cta-row{ flex-direction:column; align-items:stretch; }
+  .hero .cta-row .btn{ text-align:center; }
+  .hero .disciplines{
+    margin-top:36px; font-size:.72rem; letter-spacing:.1em; line-height:2;
+  }
+  .hero .sun{ width:340px; height:340px; top:-120px; }
+
+  /* Trust strip: clean 2×2 grid instead of wrapping soup */
+  .trust{ padding:22px 0; }
+  .trust .wrap{
+    display:grid; grid-template-columns:1fr 1fr; gap:18px 10px;
+  }
+  .trust b{ font-size:1.5rem; }
+  .trust span{ font-size:.68rem; letter-spacing:.05em; }
+
+  /* Comparison table: tighter cells + visible swipe hint */
+  .compare{ font-size:.85rem; min-width:600px; }
+  .compare th, .compare td{ padding:12px 12px; }
+  .compare thead th{ font-size:.7rem; letter-spacing:.06em; }
+  .swipe-hint{
+    display:block; margin-top:10px; font-size:.75rem;
+    color:var(--gold-deep); font-weight:500; letter-spacing:.04em;
+  }
+  .footnote{ font-size:.75rem; }
+
+  /* Weather */
+  .weather{ margin-top:44px; }
+  .weather-grid{ gap:6px; }
+  .month{ padding:10px 2px 9px; border-radius:8px; }
+  .month .t{ font-size:1.1rem; }
+  .month .m{ font-size:.62rem; }
+
+  /* Destinations: shorter cards */
+  .dest{ min-height:150px; padding:24px 20px 22px; }
+  .dest .glyph{ top:16px; right:16px; width:26px; height:26px; }
+
+  /* Founder */
+  .founder{ gap:28px; }
+  .founder-text p{ font-size:.98rem; }
+
+  /* Tabs */
+  .tabs{ margin-bottom:26px; }
+  .tab-btn{ padding:10px 20px; font-size:.88rem; flex:1; text-align:center; }
+  .tab-panel.active{ gap:32px; }
+  .check-list li{ font-size:.92rem; }
+
+  /* Process: 7 steps → single tidy column with number beside text */
+  .process{ grid-template-columns:1fr; gap:8px; }
+  .step{
+    display:flex; align-items:center; gap:14px;
+    text-align:left; padding:14px 16px;
+  }
+  .step::before{ margin-bottom:0; font-size:1.3rem; min-width:34px; }
+  .step span{ font-size:.92rem; }
+
+  /* Quote band */
+  .quote-band{ padding:56px 18px; }
+
+  /* Form */
+  .field input, .field select, .field textarea{ font-size:16px; } /* prevents iOS zoom-on-focus */
+  .form-actions .btn{ width:100%; text-align:center; }
+}
 </style>
 </head>
 <body>
@@ -495,6 +587,7 @@ footer .logo{ justify-content:center; margin-bottom:10px; }
         </tbody>
       </table>
     </div>
+    <p class="swipe-hint" data-i18n="swipe_hint">← Swipe to compare →</p>
     <p class="footnote" data-i18n="cmp_note">Indicative figures for a boutique 7-day retreat, 12–16 guests. Every proposal is custom-quoted.</p>
 
     <!-- Weather grid -->
@@ -800,6 +893,7 @@ en: {
   cmp_r4:"Retreat season", cmp_r4_eg:"All year", cmp_r4_bali:"Rainy Nov–Mar", cmp_r4_gr:"May–Sep only", cmp_r4_mo:"Spring / Autumn",
   cmp_r5:"Sea + desert + ancient temples",
   cmp_note:"Indicative figures for a boutique 7-day retreat, 12–16 guests. Every proposal is custom-quoted.",
+  swipe_hint:"← Swipe to compare →",
   weather_title:"Red Sea weather, all 12 months",
   weather_sub:"Average daytime highs. There is no wrong month to host a retreat in Egypt.",
   dest_eyebrow:"Destinations", dest_title:"Six worlds. One country.",
@@ -873,6 +967,7 @@ it: {
   cmp_r4:"Stagione retreat", cmp_r4_eg:"Tutto l'anno", cmp_r4_bali:"Piogge Nov–Mar", cmp_r4_gr:"Solo Mag–Set", cmp_r4_mo:"Primavera / Autunno",
   cmp_r5:"Mare + deserto + templi antichi",
   cmp_note:"Cifre indicative per un retreat boutique di 7 giorni, 12–16 ospiti. Ogni proposta è quotata su misura.",
+  swipe_hint:"← Scorri per confrontare →",
   weather_title:"Meteo sul Mar Rosso, 12 mesi su 12",
   weather_sub:"Massime diurne medie. Non esiste un mese sbagliato per un retreat in Egitto.",
   dest_eyebrow:"Destinazioni", dest_title:"Sei mondi. Un solo paese.",
